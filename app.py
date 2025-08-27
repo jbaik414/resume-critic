@@ -1,5 +1,5 @@
 import streamlit as st
-from src.critic import critique_resume
+from src.critique import critique_resume
 
 st.set_page_config(page_title="Resume Critic", page_icon="")
 
