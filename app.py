@@ -10,13 +10,11 @@ st.write("Upload your resume as a pdf file and get instant feedback against job 
 uploaded_file = st.file_uploader("Upload Resume", type="pdf")
 
 if uploaded_file:
-    # Save uploaded file temporarily
     with open("temp_resume.pdf", "wb") as f:
         f.write(uploaded_file.read())
     
-    st.info("✅ Resume uploaded successfully. Analyzing...")
+    st.info("Resume uploaded successfully. Analyzing...")
 
-    # Run critique
     feedback = critique_resume("temp_resume.pdf", top_k=3)
 
     st.subheader("Results")

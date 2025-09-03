@@ -1,15 +1,19 @@
 import pandas as pd
 from sentence_transformers import SentenceTransformer, util
 import spacy
-from .pdf_parser import extract_text_from_pdf
+from pdf_parser import extract_text_from_pdf
+import os
 
 embedder = SentenceTransformer("all-MiniLM-L6-v2")
 nlp = spacy.load("en_core_web_sm")
 
-df = pd.read_csv("job_title_des.csv")
+csv_path = os.path.join(os.path.dirname(__file__), "..", "data", "job_title_des.csv")
+
+df = pd.read_csv(csv_path)
+
+print(df['Job Title'].unique())
 
 def extract_keywords(text):
-    """Extract key terms (skills, orgs, products) from text."""
     doc = nlp(text)
     return set([ent.text for ent in doc.ents if ent.label_ in ["ORG","PRODUCT","GPE","SKILL"]])
 
@@ -24,6 +28,7 @@ def critique_resume(pdf_path, top_k=3):
 
     feedback = []
     for score, idx in zip(top_results[0], top_results[1]):
+        idx = int(idx)
         job_title = df.iloc[idx]["Job Title"]
         job_desc = df.iloc[idx]["Job Description"]
 
