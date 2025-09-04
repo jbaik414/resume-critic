@@ -1,7 +1,7 @@
 import pandas as pd
 from sentence_transformers import SentenceTransformer, util
 import spacy
-from pdf_parser import extract_text_from_pdf
+from .pdf_parser import extract_text_from_pdf
 import os
 
 embedder = SentenceTransformer("all-MiniLM-L6-v2")
@@ -11,7 +11,6 @@ csv_path = os.path.join(os.path.dirname(__file__), "..", "data", "job_title_des.
 
 df = pd.read_csv(csv_path)
 
-print(df['Job Title'].unique())
 
 def extract_keywords(text):
     doc = nlp(text)
