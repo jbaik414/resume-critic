@@ -12,9 +12,15 @@ st.set_page_config(
 st.markdown("""
 <style>
 /* ---------- GLOBAL ---------- */
+:root {
+    --blue-primary: #006BC3;
+    --blue-deep: #0009C3;
+    --teal-accent: #00C3BA;
+}
+
 .stApp {
-    background: linear-gradient(to bottom right, #f8fafc, #ffffff);
-    color: ##006BC3;
+    background: linear-gradient(to bottom right, #f8fbff, #ffffff);
+    color: #1b263b;
     font-family: 'Segoe UI', sans-serif;
 }
 
@@ -25,7 +31,7 @@ st.markdown("""
     padding-top: 2rem;
 }
 [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
-    color: #004F90 !important;
+    color: var(--blue-primary) !important;
 }
 [data-testid="stSidebar"] p, [data-testid="stSidebar"] div, [data-testid="stSidebar"] span {
     color: #2c3e50 !important;
@@ -39,11 +45,11 @@ st.markdown("""
 .main-header {
     text-align: center;
     margin-top: 1rem;
-    padding: 1.5rem;
-    background: linear-gradient(90deg, #004F90, #2E86C1);
+    padding: 1.6rem;
+    background: linear-gradient(90deg, var(--blue-primary), var(--teal-accent));
     color: white;
-    border-radius: 12px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 .main-header h1 {
     font-size: 2.2rem;
@@ -57,59 +63,76 @@ st.markdown("""
 
 /* ---------- UPLOAD BOX ---------- */
 .upload-box {
-    background-color: ##006BC3;
-    border-radius: 12px;
+    background-color: #ffffff;
+    border-radius: 14px;
     padding: 2rem;
     margin-top: 1.5rem;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     text-align: center;
 }
 
 /* ---------- FEEDBACK CARDS ---------- */
 .result-card {
     background-color: #fdfdfd;
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 1.2rem;
     margin: 1rem 0;
     border: 1px solid #D6DBDF;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 .result-card h4 {
-    color: #004F90;
+    color: var(--blue-deep);
     margin-bottom: 0.4rem;
 }
 .progress-label {
     font-size: 14px;
     font-weight: 600;
-    color: #2E86C1;
+    color: var(--blue-primary);
     margin-top: 4px;
+}
+
+/* ---------- PROGRESS BAR COLOR ---------- */
+div[data-testid="stProgressBar"] > div > div > div {
+    background-color: var(--teal-accent) !important;
 }
 
 /* ---------- ALERT BOXES (Custom Colors) ---------- */
 div.stAlert > div {
-    border-radius: 10px;
+    border-radius: 10px !important;
     font-weight: 500;
+    border-left: 5px solid var(--blue-primary) !important;
 }
 
 /* success */
+div[data-testid="stNotification"][class*="success"],
 div[data-baseweb="notification"][kind="success"] {
-    background-color: #EBF8F2 !important;
-    color: #155724 !important;
-    border-left: 5px solid #28A745 !important;
+    background-color: rgba(0, 195, 186, 0.12) !important;
+    color: var(--blue-deep) !important;
 }
 
 /* info */
+div[data-testid="stNotification"][class*="info"],
 div[data-baseweb="notification"][kind="info"] {
-    background-color: #E7F3FF !important;
-    color: #004085 !important;
-    border-left: 5px solid #2E86C1 !important;
+    background-color: rgba(0, 107, 195, 0.1) !important;
+    color: var(--blue-primary) !important;
 }
 
 /* warning */
+div[data-testid="stNotification"][class*="warning"],
 div[data-baseweb="notification"][kind="warning"] {
-    background-color: #FFF6E5 !important;
-    color: #8B4513 !important;
-    border-left: 5px solid #FFA726 !important;
+    background-color: rgba(0, 9, 195, 0.08) !important;
+    color: var(--blue-deep) !important;
+}
+
+/* ---------- BUTTONS ---------- */
+button[kind="primary"] {
+    background-color: var(--blue-primary) !important;
+    color: white !important;
+    border-radius: 8px !important;
+    border: none !important;
+}
+button[kind="primary"]:hover {
+    background-color: var(--blue-deep) !important;
 }
 </style>
 """, unsafe_allow_html=True)
