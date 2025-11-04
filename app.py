@@ -8,45 +8,54 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# ---- Custom CSS ----
 st.markdown("""
 <style>
-/* Background gradient */
+/* ---------- GLOBAL ---------- */
 .stApp {
-    background: linear-gradient(to bottom right, #f5f8fc, #ffffff);
+    background: linear-gradient(to bottom right, #f8fafc, #ffffff);
+    color: #1b263b;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-/* Sidebar styling */
+/* ---------- SIDEBAR ---------- */
 [data-testid="stSidebar"] {
-    background-color: #0B3C5D;
-    color: white;
+    background-color: #ffffff;
+    border-right: 1px solid #e6e9ed;
     padding-top: 2rem;
 }
 [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
-    color: #F4D03F !important;
+    color: #004F90 !important;
 }
 [data-testid="stSidebar"] p, [data-testid="stSidebar"] div, [data-testid="stSidebar"] span {
-    color: #EAECEE !important;
+    color: #2c3e50 !important;
+    font-size: 0.95rem;
+}
+[data-testid="stSidebar"] ul {
+    margin-left: -1rem;
 }
 
+/* ---------- HEADER ---------- */
 .main-header {
     text-align: center;
     margin-top: 1rem;
     padding: 1.5rem;
-    background: linear-gradient(90deg, #2E86C1, #1B4F72);
+    background: linear-gradient(90deg, #004F90, #2E86C1);
     color: white;
     border-radius: 12px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
 }
 .main-header h1 {
-    font-size: 2.3rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.3rem;
 }
 .main-header p {
     font-size: 1.05rem;
     opacity: 0.95;
 }
 
+/* ---------- UPLOAD BOX ---------- */
 .upload-box {
     background-color: #ffffff;
     border-radius: 12px;
@@ -56,6 +65,7 @@ st.markdown("""
     text-align: center;
 }
 
+/* ---------- FEEDBACK CARDS ---------- */
 .result-card {
     background-color: #fdfdfd;
     border-radius: 12px;
@@ -65,23 +75,50 @@ st.markdown("""
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 .result-card h4 {
-    color: #1B4F72;
+    color: #004F90;
     margin-bottom: 0.4rem;
 }
-
 .progress-label {
     font-size: 14px;
     font-weight: 600;
-    color: #2874A6;
+    color: #2E86C1;
     margin-top: 4px;
+}
+
+/* ---------- ALERT BOXES (Custom Colors) ---------- */
+div.stAlert > div {
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+/* success */
+div[data-baseweb="notification"][kind="success"] {
+    background-color: #EBF8F2 !important;
+    color: #155724 !important;
+    border-left: 5px solid #28A745 !important;
+}
+
+/* info */
+div[data-baseweb="notification"][kind="info"] {
+    background-color: #E7F3FF !important;
+    color: #004085 !important;
+    border-left: 5px solid #2E86C1 !important;
+}
+
+/* warning */
+div[data-baseweb="notification"][kind="warning"] {
+    background-color: #FFF6E5 !important;
+    color: #8B4513 !important;
+    border-left: 5px solid #FFA726 !important;
 }
 </style>
 """, unsafe_allow_html=True)
 
+# ---- Sidebar ----
 st.sidebar.title("About")
 st.sidebar.markdown("""
 This app uses **Natural Language Processing (NLP)** and **AI models**  
-to analyze your resume against job postings.  
+to analyze your resume against job postings.
 
 Upload your resume (PDF) to receive:  
 - Keyword and skill feedback  
@@ -89,6 +126,7 @@ Upload your resume (PDF) to receive:
 - Actionable improvement tips  
 """)
 
+# ---- Main Header ----
 st.markdown("""
 <div class="main-header">
     <h1>Resume Critic</h1>
@@ -96,17 +134,17 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-
+# ---- File Upload ----
 st.markdown('<div class="upload-box">', unsafe_allow_html=True)
 uploaded_file = st.file_uploader("Upload Your Resume (PDF)", type="pdf", label_visibility="collapsed")
 st.markdown('</div>', unsafe_allow_html=True)
 
-
+# ---- Resume Analysis ----
 if uploaded_file:
     with open("temp_resume.pdf", "wb") as f:
         f.write(uploaded_file.read())
 
-    st.success("Resume uploaded successfully!")
+    st.success("Resume uploaded successfully.")
     st.info("Analyzing your resume. Please wait...")
 
     with st.spinner("Running AI analysis..."):
