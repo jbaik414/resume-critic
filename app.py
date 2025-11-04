@@ -14,7 +14,7 @@ st.markdown("""
 /* ---------- GLOBAL ---------- */
 .stApp {
     background: linear-gradient(to bottom right, #f8fafc, #ffffff);
-    color: #1b263b;
+    color: ##006BC3;
     font-family: 'Segoe UI', sans-serif;
 }
 
@@ -57,7 +57,7 @@ st.markdown("""
 
 /* ---------- UPLOAD BOX ---------- */
 .upload-box {
-    background-color: #ffffff;
+    background-color: ##006BC3;
     border-radius: 12px;
     padding: 2rem;
     margin-top: 1.5rem;
